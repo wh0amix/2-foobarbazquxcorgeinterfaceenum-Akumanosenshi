@@ -41,8 +41,23 @@ public class Foo implements IFoo {
     }
 
     @Override
-    public void setCorge(ICorge corge) {
-        this.corge = corge;
+    public void setCorge(ICorge newCorge) {
+        if (this.corge == newCorge) {
+            return; // Protection contre appels redondants
+        }
+
+        // Nettoie l'ancienne relation
+        if (this.corge != null) {
+            ICorge oldCorge = this.corge;
+            this.corge = null; // Évite les boucles
+            oldCorge.setFoo(null);
+        }
+
+        // Établit la nouvelle relation
+        this.corge = newCorge;
+        if (newCorge != null && newCorge.getFoo() != this) {
+            newCorge.setFoo(this);
+        }
     }
 
 }
