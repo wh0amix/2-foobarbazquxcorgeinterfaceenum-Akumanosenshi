@@ -17,8 +17,8 @@ public enum EBaz implements IBaz {
     public String getName() {
         return this.name;
     }
-    public void doSomethingLikeABaz() {
-        System.out.println("Doing something like a Baz: " + name);
-    }
 
+    public void doSomethingLikeABaz() {
+        // Do nothing
+    }
 }
